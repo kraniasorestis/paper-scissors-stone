@@ -6,6 +6,47 @@ puts """
 
 """ 
 
+
+# for "graphical" representation 
+
+$paper = """                                   
+      ________                                      
+     /       /                                         
+    / paper /                                                          
+   /       /                                                
+  /_______/             
+                                          
+           """                                                
+                    
+$scissors = """
+   __   _______            
+  |__| /_//____|            
+   __|<_________                    
+  |___/|__//___/    
+      
+             """
+
+$stone = """
+     __                                                             
+  __/   \_
+     |_/_|                                                 
+     \____|                                                   
+   __\___/          
+                                                           
+          """
+          
+          
+def graph(play)  # depending on the player's pick, print the graph
+	if play == "pa"
+		puts $paper
+	elsif play == "st"
+		puts $stone
+	elsif play == "sc"
+		puts $scissors
+	end
+end
+
+
 $com = 0  # the score trackers
 $you = 0
 
@@ -36,7 +77,6 @@ def compick()         # the computer's pick
 end
 
 
-
 def result(you,pc) # define winning play (x for the player, y for the computer)
 	if $drawboard[you] == pc
 		puts " "
@@ -56,7 +96,6 @@ def result(you,pc) # define winning play (x for the player, y for the computer)
 end
 
 
-
 def play()		# pick, and compare with the computer
 	puts """	pick a play
 	
@@ -69,13 +108,16 @@ def play()		# pick, and compare with the computer
 	if pick == "pa" or "st" or "sc"
 		compick()
 		puts ""
-		puts "YOU: #{$board[pick]} vs COM: #{$board[$cpick]}"
+		puts ""
+		print "   YOU"
+		graph(pick)
+		print "   COM"
+		graph($cpick)
 		result(pick, $cpick)
 	else
 		puts "you typed something else - retype:"
 	end
 end
-
 
 
 
@@ -100,3 +142,4 @@ while game == true
 	else puts "you typed something else"
 	end
 end
+                                                                            
