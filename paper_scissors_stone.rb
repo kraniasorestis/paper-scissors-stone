@@ -4,10 +4,12 @@ puts """
 #### This is a game of paper - scisors - stone ####
 #### Good Luck and, may The Force be with you... ##
 
+
+
 """ 
 
 
-# for "graphical" representation 
+# for ASCII representation 
 
 $paper = """                                   
       ________                                      
@@ -50,17 +52,17 @@ end
 $com = 0  # the score trackers
 $you = 0
 
-$board = {"pa" => "paper",
+$board = {"pa" => "paper",    # semantics for printing the right strings
 "sc" => "scissors",
 "st" => "stone"
 }
 
-$drawboard = {"pa" => "pa", # to determine the draws later on
-"sc" => "sc",
-"st" => "st"
-}
+#$drawboard = {"pa" => "pa", # useless dead code (to determine the draws)
+#"sc" => "sc",
+#"st" => "st"
+#}
 
-$winboard = {"pa"=> "st",   # what beats what
+$winboard = {"pa"=> "st",   # what play beats what play
 "sc"=> "pa",
 "st"=> "sc"
 }
@@ -77,20 +79,18 @@ def compick()         # the computer's pick
 end
 
 
-def result(you,pc) # define winning play (x for the player, y for the computer)
-	if $drawboard[you] == pc
+def result(you, pc) # define winning play
+	if you == pc
 		puts " "
 		puts "It's a draw"
 		puts " "
 	elsif $winboard[you] == pc
 		puts " "
 		puts "Apparently you won..."
-		puts " "
 		$you += 1
 	else
 		puts " "
 		puts "Seems you lost..."
-		puts " "
 		$com += 1
 	end
 end
@@ -104,18 +104,20 @@ def play()		# pick, and compare with the computer
 	st for stone
 	
 	"""
-	pick = gets.chomp
-	if pick == "pa" or "st" or "sc"
-		compick()
+	pick = gets.chomp   # your pick
+	if pick == "pa" or pick == "st" or pick == "sc"
+		compick()       # computer's pick
 		puts ""
 		puts ""
-		print "   YOU"
-		graph(pick)
+		print "   YOU"   # print the graphics
+		graph(pick)   
 		print "   COM"
 		graph($cpick)
-		result(pick, $cpick)
-	else
+		result(pick, $cpick) # compare and print results
+	else  # error handling
+		puts ""
 		puts "you typed something else - retype:"
+		print ""
 	end
 end
 
@@ -126,20 +128,24 @@ game = true
 round = 1
 
 
-while game == true
+while game
 	puts "Play a round?"
 	puts "(y or n)"
 	x = gets.chomp()
 	if x == "n"
-		game = false 
+		game = false
+		puts "" 
 		puts "quiting..."
+		print ""
 	elsif x == "y"
 		play()
 		puts " "
-		puts "This was round #{round}   |   Score: YOU #{$you.to_s} vs COM #{$com.to_s} " 
+		puts "In round #{round}  ->  Score: YOU #{$you.to_s} vs COM #{$com.to_s} " 
 		puts " "
 		round +=1
-	else puts "you typed something else"
+	else 
+		puts ""
+		puts "you typed something else"
+		puts""
 	end
 end
-                                                                            
