@@ -8,59 +8,55 @@ puts """
 
 """ 
 
-
-# for ASCII representation 
-
-$paper = """                                   
-      ________                                      
-     /       /                                         
-    / paper /                                                          
-   /       /                                                
-  /_______/             
-                                          
-           """                                                
-                    
-$scissors = """
-   __   _______            
-  |__| /_//____|            
-   __|<_________                    
-  |___/|__//___/    
-      
-             """
-
-$stone = """
-     __                                                             
-  __/   \_
-     |_/_|                                                 
-     \____|                                                   
-   __\___/          
-                                                           
-          """
-          
           
 def graph(play)  # depending on the player's pick, print the graph
+
+	# for the ASCII representation 
+	paper = """                                   
+	      ________                                      
+	     /       /                                         
+	    / paper /                                                          
+	   /       /                                                
+	  /_______/             
+	                                          
+	           """                                                
+	                    
+	scissors = """
+	   __   _______            
+	  |__| /_//____|            
+	   __|<_________                    
+	  |___/|__//___/    
+	      
+	             """
+	
+	stone = """
+	     __                                                             
+	  __/   \_
+	     |_/_|                                                 
+	     \____|                                                   
+	   __\___/          
+	                                                           
+	          """
+          
 	if play == "pa"
-		puts $paper
+		puts paper
 	elsif play == "st"
-		puts $stone
+		puts stone
 	elsif play == "sc"
-		puts $scissors
+		puts scissors
 	end
 end
 
 
 $com = 0  # the score trackers
 $you = 0
+$round = 0
 
 $board = {"pa" => "paper",    # semantics for printing the right strings
 "sc" => "scissors",
 "st" => "stone"
 }
 
-#$drawboard = {"pa" => "pa", # useless dead code (to determine the draws)
-#"sc" => "sc",
-#"st" => "st"
-#}
 
 $winboard = {"pa"=> "st",   # what play beats what play
 "sc"=> "pa",
@@ -114,9 +110,13 @@ def play()		# pick, and compare with the computer
 		print "   COM"
 		graph($cpick)
 		result(pick, $cpick) # compare and print results
+		$round += 1
+		puts " "
+		puts "In round #{$round}  ->  Score: YOU #{$you.to_s} vs COM #{$com.to_s} " 
+		puts " "
 	else  # error handling
 		puts ""
-		puts "you typed something else - retype:"
+		puts "you typed something else:"
 		print ""
 	end
 end
@@ -125,8 +125,6 @@ end
 
 # The main game loop
 game = true
-round = 1
-
 
 while game
 	puts "Play a round?"
@@ -139,10 +137,6 @@ while game
 		print ""
 	elsif x == "y"
 		play()
-		puts " "
-		puts "In round #{round}  ->  Score: YOU #{$you.to_s} vs COM #{$com.to_s} " 
-		puts " "
-		round +=1
 	else 
 		puts ""
 		puts "you typed something else"
