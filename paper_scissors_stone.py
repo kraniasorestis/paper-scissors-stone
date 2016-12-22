@@ -4,11 +4,11 @@ print """
 
 
 #### This is a game of paper - scisors - stone ####
-#### Good Luck and, may the Force be with you... ##
+#### Good Luck and have fun! ##
 
 
 
-""" 
+"""
 
 #### globals for keeping track of the score and the round ####
 
@@ -21,32 +21,32 @@ cpick = 0 # this is the computer's pick and is used by many functions
 def graph(play):  # depending on the player's pick, print the graph
 
 	# ASCII representations of the possible picks
-	paper = """                                   
-	      ________                                      
-	     /       /                                         
-	    / paper /                                                          
-	   /       /                                                
-	  /_______/             
-	                                          
-	           """                                                
-	                    
+	paper = """
+	      ________
+	     /       /
+	    / paper /
+	   /       /
+	  /_______/
+
+	           """
+
 	scissors = """
-	   __   _______            
-	  |__| /_//____\            
-	   __|<_________                    
-	  |___/|__//___/    
-	      
+	   __   _______
+	  |__| /_//____\
+	   __|<_________
+	  |___/|__//___/
+
 	             """
-	
+
 	stone = """
-	     __ _                                                            
-	  __/  |_\                               
-	     |_/__|                  
-	     \____|                        
-	   __\___/          
-	                                                           
+	     __ _
+	  __/  |_\
+	     |_/__|
+	     \____|
+	   __\___/
+
 	          """
-          
+
 	if play == "pa":    # for paper
 		print paper
 	elif play == "st":  # for scizors
@@ -67,14 +67,14 @@ def compick():        # the computer's pick
 
 
 def result(yplay, pcplay): # define winning play
-	
+
 	global you # for adjusting the score record
 	global com
-	
+
 	winboard = {"pa": "st",   # what play beats what play
 	"sc": "pa",
 	"st": "sc"}
-	
+
 	if yplay == pcplay:
 		print "\n It's a draw \n"
 	elif winboard[yplay] == pcplay:
@@ -87,11 +87,11 @@ def result(yplay, pcplay): # define winning play
 
 def play():		# pick, and compare with the computer
 	print """	pick a play
-	
+
 	pa for paper
 	sc for scissors
 	st for stone
-	
+
 	"""
 	pick = raw_input()  # your pick
 	if pick == "pa" or pick == "st" or pick == "sc":
@@ -121,5 +121,5 @@ while game:
 		print "\n quiting... \n"
 	elif x == "y":
 		play()
-	else: 
+	else:
 		print "\n you typed something else \n"
